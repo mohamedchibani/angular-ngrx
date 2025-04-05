@@ -1,0 +1,11 @@
+<div class="card bg-base-100 m-3 shadow-2xl">
+  <img class="rounded-box" [src]="user.avatar_url" [alt]="user.login" />
+  <div class="card-body">
+    <div class="card-actions justify-between">
+      <h2 class="card-title">{{ user.login }}</h2>
+      <a [href]="user.html_url" class="btn btn-sm btn-outline btn-success"
+        >Visit us</a
+      >
+    </div>
+  </div>
+</div>

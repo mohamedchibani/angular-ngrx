@@ -1,0 +1,76 @@
+<div class="flex justify-center flex-col items-center h-sreen bg-base-100">
+  <h1 class="text-3xl font-bold my-6">Login</h1>
+
+  @if(errorMessage){
+  <div class="badge badge-outline badge-error gap-2">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      class="inline-block w-4 h-4 stroke-current"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        d="M6 18L18 6M6 6l12 12"
+      ></path>
+    </svg>
+    {{ errorMessage }}
+  </div>
+
+  }
+
+  <form
+    [formGroup]="loginForm"
+    (ngSubmit)="onSubmit()"
+    class="bg-base-200 p-16 rounded-3xl mb-6"
+  >
+    <div class="form-control w-full max-w-xs">
+      <label class="label">
+        <span class="label-text">Username</span>
+        <span class="label-text-alt"></span>
+      </label>
+      <input
+        formControlName="username"
+        type="text"
+        placeholder="Type here"
+        class="input input-bordered w-full max-w-xs"
+      />
+      @if(loginForm.get('username')?.invalid &&
+      loginForm.get('username')?.touched){
+      <label class="label">
+        @if(loginForm.get('username')?.hasError('required')){
+        <span class="label-text-alt text-red-400">Username is required</span>
+        }
+      </label>
+      }
+    </div>
+
+    <div class="form-control w-full max-w-xs mt-4">
+      <label class="label">
+        <span class="label-text">Password</span>
+        <span class="label-text-alt"></span>
+      </label>
+      <input
+        formControlName="password"
+        type="password"
+        placeholder="Type here"
+        class="input input-bordered w-full max-w-xs"
+      />
+      @if(loginForm.get('password')?.invalid &&
+      loginForm.get('password')?.touched){
+      <label class="label">
+        @if(loginForm.get('password')?.hasError('required')){
+        <span class="label-text-alt text-red-400">Password is required</span>
+        } @if(loginForm.get('password')?.hasError('pattern')){
+        <span class="label-text-alt text-red-400"
+          >Password should be alpha numeric with 8 caracters</span
+        >
+        }
+      </label>
+      }
+    </div>
+    <button class="btn btn-wide btn-outline btn-error mt-5">Login</button>
+  </form>
+</div>

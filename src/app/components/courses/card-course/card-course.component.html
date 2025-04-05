@@ -1,0 +1,21 @@
+<div class="card bg-base-100 shadow-xl">
+  <figure><img [src]="course.url" [alt]="course.title" /></figure>
+  <div class="card-body">
+    <h2 class="card-title">{{ course.title }}</h2>
+    <p>{{ course.content }}</p>
+    <div class="card-actions justify-end">
+      <button data-tip="Edit" class="tooltip btn btn-sm btn-warning">
+        <app-edit-icon [size]="4"></app-edit-icon>
+      </button>
+      @if(course.id){
+      <button
+        data-tip="Delete"
+        class="tooltip btn btn-sm btn-error"
+        (click)="deleteCourse(course.id)"
+      >
+        <app-delete-icon [size]="4"></app-delete-icon>
+      </button>
+      }
+    </div>
+  </div>
+</div>

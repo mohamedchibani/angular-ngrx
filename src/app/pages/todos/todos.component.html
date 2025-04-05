@@ -1,0 +1,79 @@
+@if(notify){
+<div class="toast" [ngClass]="['toast-bottom', notification.position]">
+  <div class="alert" [ngClass]="notification.alertClass">
+    <span>{{ notification.message }}.</span>
+  </div>
+</div>
+}
+
+<div
+  class="hero"
+  style="
+    background-image: url(https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp);
+  "
+>
+  <div class="hero-overlay"></div>
+  <div class="hero-content text-neutral-content text-center">
+    <div class="max-w-md">
+      <h1 class="mb-5 text-5xl font-bold">{{ title }}</h1>
+      <p class="mb-5">Your complete guide to effective Angular To-Do list</p>
+      <button
+        class="btn"
+        [ngStyle]="{
+          color: showForm ? 'red' : 'white',
+          fontSize: isEditMode ? '20px' : '10px'
+        }"
+        [ngClass]="{
+          'btn-primary': showForm && !isEditMode,
+          'btn-neutral': !showForm,
+          'btn-warning': isEditMode
+        }"
+        (click)="toggleForm()"
+      >
+        {{ changeToggleBtn() }}
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="flex flex-col gap-4 items-center mt-10">
+  @if(showForm){
+  <!-- keyup.control.arrowup -->
+  <input
+    (keyup.enter)="onSubmit()"
+    [(ngModel)]="myTodo"
+    type="text"
+    [placeholder]="defaultTodo"
+    class="input input-bordered w-full max-w-xs"
+  />
+  @if(isEditMode){
+  <div class="flex gap-4">
+    <button class="btn w-56 btn-warning" (click)="onSubmit()">Update</button>
+    <button class="btn btn-neutral" (click)="onCancel()">Cancel</button>
+  </div>
+  } @else {
+  <button class="btn btn-wide btn-primary" (click)="onSubmit()">Create</button>
+  } } @else {
+  <p>Click the button above to show the form</p>
+  }
+  <ul class="menu bg-base-200 rounded-box w-80">
+    @for (todo of todos; track i; let i = $index; let c = $count; let f =
+    $first; let l = $last; let o = $odd; let e = $even ) {
+    <li>
+      <span (dblclick)="onDeleteTodo(i)">{{ todo }} </span>
+      <div class="justify-end">
+        <button class="btn btn-warning btn-sm" (click)="onEditTodo(todo, i)">
+          <app-edit-icon [size]="4"></app-edit-icon>
+        </button>
+        @if(!isEditMode){
+        <button class="btn btn-error btn-sm" (click)="onDeleteTodo(i)">
+          <app-delete-icon [size]="4"></app-delete-icon>
+        </button>
+        }
+      </div>
+    </li>
+    } @empty {
+    <p>No todos</p>
+    }
+  </ul>
+</div>

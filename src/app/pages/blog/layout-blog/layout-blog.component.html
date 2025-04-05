@@ -1,0 +1,41 @@
+@let title = (title$ |async) ?? 'List';
+
+<div class="flex mt-6 mx-10 justify-between">
+  <h1 class="text-3xl font-black" Blog></h1>
+  @if(title == 'List'){
+  <a routerLink="/blog/create" class="btn btn-accent">Add</a>
+  } @else {
+  <a routerLink="/blog/list" class="btn btn-accent">Back</a>
+  }
+</div>
+
+<div class="flex my-3 mx-10">
+  <div class="breadcrumbs text-sm">
+    <ul>
+      <li><a routerLink="/">Home</a></li>
+      <li><a routerLink="/blog/list">Blog</a></li>
+      <li>{{ title }}</li>
+    </ul>
+  </div>
+</div>
+
+<div class="flex flex-row my-10">
+  <div class="basis-3/4">
+    <router-outlet></router-outlet>
+  </div>
+  <div class="basis-1/4">
+    <div class="dropdown dropdown-open">
+      <div tabindex="0" role="button" class="btn m-1">Categories</div>
+      <ul
+        tabindex="0"
+        class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
+      >
+        @for (category of categoryService.categories(); track $index) {
+        <li>
+          <a>{{ category.name }}</a>
+        </li>
+        }
+      </ul>
+    </div>
+  </div>
+</div>

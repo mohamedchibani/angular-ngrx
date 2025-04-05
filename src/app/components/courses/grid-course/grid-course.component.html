@@ -1,0 +1,10 @@
+<div
+  class="grid xs:grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 mt-6"
+>
+  @for (course of courses; track i; let i = $index) { @if(course.id){
+  <app-card-course
+    [course]="course"
+    (delete)="onDeleteCourse(course.id)"
+  ></app-card-course>
+  } }
+</div>
