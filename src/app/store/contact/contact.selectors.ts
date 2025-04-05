@@ -7,3 +7,8 @@ export const selectContacts = createSelector(
   trackContacts,
   (state) => state.contacts
 );
+
+export const selectContactOptions = createSelector(
+  trackContacts,
+  ({ showForm, edit }) => ({ edit, showForm })
+);

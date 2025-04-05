@@ -8,4 +8,5 @@ export interface ContactModel {
 export interface ContactState {
   contacts: ContactModel[];
   edit: boolean;
+  showForm: boolean;
 }
