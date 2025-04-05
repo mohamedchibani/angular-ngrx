@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { selectCount } from '../../store/counter/counter.selector';
 import { Observable } from 'rxjs';
 import {
-  descrement,
+  decrement,
   increment,
   reset,
 } from '../../store/counter/counter.actions';
@@ -28,7 +28,7 @@ export class CounterPageComponent {
     this.store.dispatch(increment());
   }
   decrement() {
-    this.store.dispatch(descrement());
+    this.store.dispatch(decrement());
   }
   reset() {
     this.store.dispatch(reset());
