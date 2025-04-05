@@ -1,6 +1,7 @@
+import { contacts } from '../../data';
 import { ContactState } from './contact.model';
 
 export const contactState: ContactState = {
-  contacts: [],
+  contacts: contacts,
   edit: false,
 };

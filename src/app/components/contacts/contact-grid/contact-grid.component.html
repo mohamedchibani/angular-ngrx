@@ -1,13 +1,17 @@
-@for(contact of contacts | async; track $index){
+<div
+  class="grid xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 my-10"
+>
+  @for(contact of contacts | async; track $index){
 
-<div class="card w-96 bg-base-100 shadow-xl m-3">
-  <div class="card-body">
-    <h2 class="card-title">{{ contact.name }}</h2>
-    <p>{{ contact.phone }}?</p>
-    <div class="card-actions justify-end">
-      <app-contact-actions></app-contact-actions>
+  <div class="card w-96 bg-base-100 shadow-xl m-3">
+    <div class="card-body">
+      <h2 class="card-title">{{ contact.name }}</h2>
+      <p>{{ contact.phone }}?</p>
+      <div class="card-actions justify-end">
+        <app-contact-actions [contact]="contact"></app-contact-actions>
+      </div>
     </div>
   </div>
-</div>
 
-}
+  }
+</div>

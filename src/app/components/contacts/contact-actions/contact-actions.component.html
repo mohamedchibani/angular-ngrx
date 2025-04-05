@@ -1,1 +1,9 @@
-<p>contact-actions works!</p>
+<div class="flex flex-row items-center ms-5 mx-2 gap-5">
+  <input
+    type="checkbox"
+    class="toggle toggle-success"
+    [checked]="contact.active"
+  />
+  <button class="btn btn-warning btn-sm">Edit</button>
+  <button class="btn btn-error btn-sm">Delete</button>
+</div>

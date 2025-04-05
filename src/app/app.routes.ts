@@ -3,6 +3,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { LayoutBlogComponent } from './pages/blog/layout-blog/layout-blog.component';
 import { authGuard } from './guards/auth.guard';
+import { ContactsComponent } from './pages/contacts/contacts.component';
 
 export const routes: Routes = [
   {
@@ -60,6 +61,10 @@ export const routes: Routes = [
     path: 'auth',
     loadChildren: () =>
       import('./pages/auth/auth.routes').then((m) => m.authRoutes),
+  },
+  {
+    path: 'contacts',
+    component: ContactsComponent,
   },
   {
     path: '**',
