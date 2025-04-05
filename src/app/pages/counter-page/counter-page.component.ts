@@ -1,9 +1,13 @@
 import { AsyncPipe } from '@angular/common';
-import { CounterService } from './../../services/counter.service';
-import { Component, computed, effect, signal, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { selectCount } from '../../store/counter/counter.selector';
 import { Observable } from 'rxjs';
+import {
+  descrement,
+  increment,
+  reset,
+} from '../../store/counter/counter.actions';
 
 @Component({
   selector: 'app-counter-page',
@@ -12,12 +16,21 @@ import { Observable } from 'rxjs';
   styleUrl: './counter-page.component.css',
 })
 export class CounterPageComponent {
-  counterService = inject(CounterService);
   store = inject(Store);
 
   count!: Observable<number>;
 
   ngOnInit() {
     this.count = this.store.select(selectCount);
+  }
+
+  increment() {
+    this.store.dispatch(increment());
+  }
+  decrement() {
+    this.store.dispatch(descrement());
+  }
+  reset() {
+    this.store.dispatch(reset());
   }
 }
