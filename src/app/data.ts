@@ -1,4 +1,5 @@
 import { Course } from './models/course';
+import { ContactModel } from './store/contact/contact.model';
 
 export const courseList: Course[] = [
   {
@@ -105,4 +106,17 @@ export const courseList: Course[] = [
     publishedAt: new Date('2025-03-24T14:00:00'),
     active: false,
   },
+];
+
+export const contacts: ContactModel[] = [
+  { id: 1, name: 'Alice', phone: '+212612345678', active: true },
+  { id: 2, name: 'Bob', phone: '+212623456789', active: false },
+  { id: 3, name: 'Charlie', phone: '+212634567890', active: true },
+  { id: 4, name: 'Dina', phone: '+212645678901', active: false },
+  { id: 5, name: 'Elias', phone: '+212656789012', active: true },
+  { id: 6, name: 'Fatima', phone: '+212667890123', active: true },
+  { id: 7, name: 'Hassan', phone: '+212678901234', active: false },
+  { id: 8, name: 'Imane', phone: '+212689012345', active: true },
+  { id: 9, name: 'Jamal', phone: '+212690123456', active: false },
+  { id: 10, name: 'Karim', phone: '+212601234567', active: true },
 ];
