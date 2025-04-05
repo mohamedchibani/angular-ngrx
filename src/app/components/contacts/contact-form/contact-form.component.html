@@ -1,4 +1,4 @@
-<form [formGroup]="contactForm">
+<form [formGroup]="contactForm" class="bg-base-200 p-10 rounded-3xl">
   <div class="form-control w-full max-w-xs">
     <label class="label">
       <span class="label-text">Name</span>
@@ -6,7 +6,7 @@
     <input
       formControlName="name"
       type="text"
-      placeholder="Type here"
+      placeholder="Contact Name"
       class="input input-bordered w-full max-w-xs"
     />
     @if(name?.invalid && name?.touched && name?.dirty){
@@ -17,14 +17,14 @@
     </div>
     }
   </div>
-  <div class="form-control w-full max-w-xs">
+  <div class="form-control w-full max-w-xs my-2">
     <label class="label">
       <span class="label-text">Phone</span>
     </label>
     <input
       formControlName="phone"
       type="text"
-      placeholder="Type here"
+      placeholder="Contact phone"
       class="input input-bordered w-full max-w-xs"
     />
     @if(phone?.invalid && phone?.touched && phone?.dirty){
@@ -35,10 +35,17 @@
     </div>
     }
   </div>
-  <div class="form-control">
+  <div class="form-control my-4">
     <label class="label cursor-pointer">
       <span class="label-text">Active</span>
-      <input formControlName="active" type="checkbox" class="toggle" checked />
+      <input
+        formControlName="active"
+        type="checkbox"
+        class="toggle toggle-success"
+        checked
+      />
     </label>
   </div>
+
+  <button class="btn btn-accent btn-outline btn-wide">Submit</button>
 </form>
