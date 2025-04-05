@@ -1,1 +1,44 @@
-<p>contact-form works!</p>
+<form [formGroup]="contactForm">
+  <div class="form-control w-full max-w-xs">
+    <label class="label">
+      <span class="label-text">Name</span>
+    </label>
+    <input
+      formControlName="name"
+      type="text"
+      placeholder="Type here"
+      class="input input-bordered w-full max-w-xs"
+    />
+    @if(name?.invalid && name?.touched && name?.dirty){
+    <div class="flex flex-col alert alert-error">
+      @if(name?.hasError('required')){
+      <div>Name is required</div>
+      }
+    </div>
+    }
+  </div>
+  <div class="form-control w-full max-w-xs">
+    <label class="label">
+      <span class="label-text">Phone</span>
+    </label>
+    <input
+      formControlName="phone"
+      type="text"
+      placeholder="Type here"
+      class="input input-bordered w-full max-w-xs"
+    />
+    @if(phone?.invalid && phone?.touched && phone?.dirty){
+    <div class="flex flex-col alert alert-error">
+      @if(phone?.hasError('required')){
+      <div>Phone is required</div>
+      }
+    </div>
+    }
+  </div>
+  <div class="form-control">
+    <label class="label cursor-pointer">
+      <span class="label-text">Active</span>
+      <input formControlName="active" type="checkbox" class="toggle" checked />
+    </label>
+  </div>
+</form>
