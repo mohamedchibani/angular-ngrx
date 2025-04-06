@@ -14,6 +14,7 @@ import {
 import { random } from 'lodash';
 import { selectContact } from '../../../store/contact/contact.selectors';
 import { ContactModel } from '../../../store/contact/contact.model';
+import { notify } from '../../../store/toast/toast.actions';
 
 @Component({
   selector: 'app-contact-form',
@@ -72,6 +73,9 @@ export class ContactFormComponent {
     };
 
     this.store.dispatch(updateContact({ contact: contact }));
+    this.store.dispatch(
+      notify({ message: 'Contact updated', color: 'alert-warning' })
+    );
   }
 
   createContact() {
@@ -81,6 +85,9 @@ export class ContactFormComponent {
     };
 
     this.store.dispatch(addContact({ contact }));
+    this.store.dispatch(
+      notify({ message: 'Contact created', color: 'alert-success' })
+    );
   }
 
   get name() {

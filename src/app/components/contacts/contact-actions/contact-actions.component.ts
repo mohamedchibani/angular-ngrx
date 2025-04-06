@@ -34,6 +34,9 @@ export class ContactActionsComponent {
   toggle() {
     if (this.contact.id) {
       this.store.dispatch(toggleActiveContact({ id: this.contact.id }));
+      this.store.dispatch(
+        notify({ message: 'Contact changed', color: 'alert-info' })
+      );
     }
   }
 
