@@ -7,6 +7,7 @@ import {
   editContact,
   toggleActiveContact,
 } from '../../../store/contact/contact.actions';
+import { notify } from '../../../store/toast/toast.actions';
 
 @Component({
   selector: 'app-contact-actions',
@@ -24,6 +25,9 @@ export class ContactActionsComponent {
 
     if (this.contact.id) {
       this.store.dispatch(deleteContact({ id: this.contact.id }));
+      this.store.dispatch(
+        notify({ message: 'contact is deleted', type: 'alert-success' })
+      );
     }
   }
 
