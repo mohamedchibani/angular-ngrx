@@ -6,7 +6,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { cancel } from '../../../store/contact/contact.actions';
+import { addContact, cancel } from '../../../store/contact/contact.actions';
+import { random } from 'lodash';
 
 @Component({
   selector: 'app-contact-form',
@@ -28,6 +29,26 @@ export class ContactFormComponent {
 
   close() {
     this.store.dispatch(cancel());
+  }
+
+  submit() {
+    this.createContact();
+  }
+
+  createContact() {
+    if (this.contactForm.invalid) {
+      alert('contact form is invalid');
+      return;
+    }
+
+    const contact = {
+      ...this.contactForm.value,
+      id: random(20, 2500),
+    };
+
+    this.store.dispatch(addContact({ contact }));
+
+    this.contactForm.reset();
   }
 
   get name() {
