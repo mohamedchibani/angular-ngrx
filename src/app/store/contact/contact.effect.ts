@@ -16,7 +16,10 @@ export class ContactEffect {
   addContactEffect = createEffect(() =>
     this.actions$.pipe(
       ofType(addContact),
-      map(() => notify({ message: 'Contact created', color: 'alert-success' }))
+      map((data) => {
+        console.log(data);
+        return notify({ message: 'Contact created', color: 'alert-success' });
+      })
     )
   );
 
@@ -37,7 +40,10 @@ export class ContactEffect {
   toggleContactEffect = createEffect(() =>
     this.actions$.pipe(
       ofType(toggleActiveContact),
-      map(() => notify({ message: 'Contact changed', color: 'alert-info' }))
+      map((data) => {
+        const status = data.active ? 'desactivated' : 'activated';
+        return notify({ message: `Contact ${status}`, color: 'alert-info' });
+      })
     )
   );
 }

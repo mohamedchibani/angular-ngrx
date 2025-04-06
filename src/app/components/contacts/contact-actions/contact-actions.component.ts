@@ -30,7 +30,12 @@ export class ContactActionsComponent {
 
   toggle() {
     if (this.contact.id) {
-      this.store.dispatch(toggleActiveContact({ id: this.contact.id }));
+      this.store.dispatch(
+        toggleActiveContact({
+          id: this.contact.id,
+          active: this.contact.active,
+        })
+      );
     }
   }
 

@@ -17,7 +17,7 @@ export const deleteContact = createAction(
 
 export const toggleActiveContact = createAction(
   '[Contacts] Toggle active a contact',
-  props<{ id: number }>()
+  props<{ id: number; active: boolean }>()
 );
 
 export const editContact = createAction(
