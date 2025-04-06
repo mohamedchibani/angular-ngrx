@@ -14,7 +14,6 @@ import {
 import { random } from 'lodash';
 import { selectContact } from '../../../store/contact/contact.selectors';
 import { ContactModel } from '../../../store/contact/contact.model';
-import { notify } from '../../../store/toast/toast.actions';
 
 @Component({
   selector: 'app-contact-form',

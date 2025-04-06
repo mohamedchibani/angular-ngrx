@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class ContactService {
+export class ContactsService {
   apiUrl = 'http://localhost:3001/contacts';
 
   http = inject(HttpClient);
@@ -15,7 +15,7 @@ export class ContactService {
     return this.http.get<ContactModel[]>(this.apiUrl);
   }
 
-  saveContact(contact: ContactModel): Observable<ContactModel> {
+  save(contact: ContactModel): Observable<ContactModel> {
     return this.http.post<ContactModel>(this.apiUrl, contact);
   }
 

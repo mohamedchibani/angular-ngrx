@@ -161,5 +161,12 @@
     }
   ],
   "users": [],
-  "contacts": []
+  "contacts": [
+    {
+      "id": 2019,
+      "name": "Mohamed CHIBANI",
+      "phone": "089034723413",
+      "active": null
+    }
+  ]
 }

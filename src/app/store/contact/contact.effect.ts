@@ -6,20 +6,27 @@ import {
   toggleActiveContact,
   updateContact,
 } from './contact.actions';
-import { map } from 'rxjs';
+import { exhaustMap, map } from 'rxjs';
 import { notify } from '../toast/toast.actions';
+import { ContactsService } from '../../services/contacts.service';
 
 @Injectable()
 export class ContactEffect {
   actions$ = inject(Actions);
+  contactsService = inject(ContactsService);
 
   addContactEffect = createEffect(() =>
     this.actions$.pipe(
       ofType(addContact),
-      map((data) => {
-        console.log(data);
-        return notify({ message: 'Contact created', color: 'alert-success' });
-      })
+      exhaustMap((data) =>
+        this.contactsService
+          .save(data.contact)
+          .pipe(
+            map((res) =>
+              notify({ message: 'Contact created', color: 'alert-success' })
+            )
+          )
+      )
     )
   );
 
