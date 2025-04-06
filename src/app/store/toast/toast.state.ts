@@ -1,1 +1,9 @@
-export const toastState = {};
+import { ToastState } from './toast.model';
+
+export const toastState: ToastState = {
+  message: '',
+  type: 'alert-info',
+  position: 'toast-end',
+  duration: 4000,
+  isVisible: false,
+};
