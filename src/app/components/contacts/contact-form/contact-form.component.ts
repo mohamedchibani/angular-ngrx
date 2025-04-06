@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { cancel } from '../../../store/contact/contact.actions';
 
 @Component({
   selector: 'app-contact-form',
@@ -14,6 +16,7 @@ import {
 })
 export class ContactFormComponent {
   contactForm!: FormGroup;
+  store = inject(Store);
 
   constructor() {
     this.contactForm = new FormGroup({
@@ -21,6 +24,10 @@ export class ContactFormComponent {
       phone: new FormControl('', Validators.required),
       active: new FormControl(true),
     });
+  }
+
+  close() {
+    this.store.dispatch(cancel());
   }
 
   get name() {

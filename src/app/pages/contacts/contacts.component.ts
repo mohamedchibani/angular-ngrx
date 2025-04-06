@@ -6,6 +6,7 @@ import { ContactFormComponent } from '../../components/contacts/contact-form/con
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { selectContactOptions } from '../../store/contact/contact.selectors';
+import { show } from '../../store/contact/contact.actions';
 
 @Component({
   selector: 'app-contacts',
@@ -24,5 +25,9 @@ export class ContactsComponent {
 
   ngOnInit() {
     this.options = this.store.select(selectContactOptions);
+  }
+
+  show() {
+    this.store.dispatch(show());
   }
 }

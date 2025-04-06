@@ -19,3 +19,6 @@ export const toggleActiveContact = createAction(
   '[Contacts] Toggle active a contact',
   props<{ id: number }>()
 );
+
+export const show = createAction('[Contacts] Show a form contact');
+export const cancel = createAction('[Contacts] Cancel ');

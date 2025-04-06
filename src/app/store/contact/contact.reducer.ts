@@ -6,6 +6,8 @@ import {
   updateContact,
   deleteContact,
   toggleActiveContact,
+  show,
+  cancel,
 } from './contact.actions';
 import { contacts } from '../../data';
 
@@ -33,5 +35,7 @@ export const contactReducer = createReducer(
         ? { ...contact, active: !contact.active }
         : contact
     ),
-  }))
+  })),
+  on(show, (state) => ({ ...state, showForm: true })),
+  on(cancel, (state) => ({ ...state, showForm: false, edit: false }))
 );
