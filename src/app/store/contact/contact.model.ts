@@ -9,4 +9,5 @@ export interface ContactState {
   contacts: ContactModel[];
   edit: boolean;
   showForm: boolean;
+  contact: ContactModel | undefined;
 }

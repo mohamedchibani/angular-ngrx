@@ -12,3 +12,8 @@ export const selectContactOptions = createSelector(
   trackContacts,
   ({ showForm, edit }) => ({ edit, showForm })
 );
+
+export const selectContact = createSelector(
+  trackContacts,
+  (state) => state.contact
+);

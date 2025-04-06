@@ -1,8 +1,10 @@
+import { contacts } from './../../../data';
 import { Component, inject, Input } from '@angular/core';
 import { ContactModel } from '../../../store/contact/contact.model';
 import { Store } from '@ngrx/store';
 import {
   deleteContact,
+  editContact,
   toggleActiveContact,
 } from '../../../store/contact/contact.actions';
 
@@ -29,5 +31,9 @@ export class ContactActionsComponent {
     if (this.contact.id) {
       this.store.dispatch(toggleActiveContact({ id: this.contact.id }));
     }
+  }
+
+  edit() {
+    this.store.dispatch(editContact({ contact: this.contact }));
   }
 }

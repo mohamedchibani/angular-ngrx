@@ -8,6 +8,7 @@ import {
 import { Store } from '@ngrx/store';
 import { addContact, cancel } from '../../../store/contact/contact.actions';
 import { random } from 'lodash';
+import { selectContact } from '../../../store/contact/contact.selectors';
 
 @Component({
   selector: 'app-contact-form',
@@ -24,6 +25,16 @@ export class ContactFormComponent {
       name: new FormControl('', Validators.required),
       phone: new FormControl('', Validators.required),
       active: new FormControl(true),
+    });
+  }
+
+  ngOnInit() {
+    this.store.select(selectContact).subscribe((res) => {
+      if (res) {
+        this.contactForm.patchValue(res);
+      } else {
+        this.contactForm.reset();
+      }
     });
   }
 

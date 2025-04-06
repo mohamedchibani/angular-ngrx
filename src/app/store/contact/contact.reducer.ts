@@ -8,12 +8,13 @@ import {
   toggleActiveContact,
   show,
   cancel,
+  editContact,
 } from './contact.actions';
 import { contacts } from '../../data';
 
 export const contactReducer = createReducer(
   contactState,
-  on(loadContacts, (state) => ({ ...state, contact: contacts })),
+  on(loadContacts, (state) => ({ ...state, contacts: contacts })),
   on(addContact, (state, action) => ({
     ...state,
     showForm: false,
@@ -37,6 +38,22 @@ export const contactReducer = createReducer(
         : contact
     ),
   })),
-  on(show, (state) => ({ ...state, showForm: true })),
-  on(cancel, (state) => ({ ...state, showForm: false, edit: false }))
+  on(show, (state) => ({
+    ...state,
+    showForm: true,
+    edit: false,
+    contact: undefined,
+  })),
+  on(cancel, (state) => ({
+    ...state,
+    showForm: false,
+    edit: false,
+    contact: undefined,
+  })),
+  on(editContact, (state, action) => ({
+    ...state,
+    contact: action.contact,
+    showForm: true,
+    edit: true,
+  }))
 );
