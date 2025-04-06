@@ -1,5 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { ContactModel } from '../../../store/contact/contact.model';
+import { Store } from '@ngrx/store';
+import { deleteContact } from '../../../store/contact/contact.actions';
 
 @Component({
   selector: 'app-contact-actions',
@@ -9,4 +11,14 @@ import { ContactModel } from '../../../store/contact/contact.model';
 })
 export class ContactActionsComponent {
   @Input() contact!: ContactModel;
+
+  store = inject(Store);
+
+  delete() {
+    if (!confirm('Are you sure to delete this contact')) return;
+
+    if (this.contact.id) {
+      this.store.dispatch(deleteContact({ id: this.contact.id }));
+    }
+  }
 }
