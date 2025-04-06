@@ -1,6 +1,6 @@
 export interface ToastState {
   message: string;
-  type: string;
+  color: string;
   position: string;
   duration: number;
   isVisible: boolean;

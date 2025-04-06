@@ -4,7 +4,7 @@ export const notify = createAction(
   '[Execute a toast]',
   props<{
     message: string;
-    type?: string;
+    color?: string;
     position?: string;
     duration?: number;
   }>()

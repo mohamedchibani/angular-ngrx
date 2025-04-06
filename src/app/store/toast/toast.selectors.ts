@@ -7,9 +7,9 @@ export const selectToastMessage = createSelector(
   trackToast,
   (state) => state.message
 );
-export const selectToastType = createSelector(
+export const selectToastColor = createSelector(
   trackToast,
-  (state) => state.type
+  (state) => state.color
 );
 export const selectToastPosition = createSelector(
   trackToast,

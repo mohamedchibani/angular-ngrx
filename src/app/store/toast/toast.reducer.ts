@@ -7,7 +7,7 @@ export const toastReducer = createReducer(
   on(notify, (state, action) => ({
     ...state,
     message: action.message,
-    type: action.type ?? state.type,
+    color: action.color ?? state.color,
     position: action.position ?? state.position,
     duration: action.duration ?? state.duration,
     isVisible: true,

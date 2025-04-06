@@ -15,18 +15,24 @@ export class ToastComponent {
 
   message = '';
   position = '';
-  type = '';
+  color = '';
   duration = 4000;
   isVisible = false;
 
   ngOnInit() {
     this.store.select(selectToast).subscribe((res) => {
-      const { message, position, type, duration, isVisible } = res;
+      const { message, position, color, duration, isVisible } = res;
       this.message = message;
       this.position = position;
-      this.type = type;
+      this.color = color;
       this.duration = duration;
       this.isVisible = isVisible;
+
+      if (this.isVisible) {
+        setTimeout(() => {
+          this.close();
+        }, this.duration);
+      }
     });
   }
 

@@ -26,7 +26,7 @@ export class ContactActionsComponent {
     if (this.contact.id) {
       this.store.dispatch(deleteContact({ id: this.contact.id }));
       this.store.dispatch(
-        notify({ message: 'contact is deleted', type: 'alert-success' })
+        notify({ message: 'Contact deleted', color: 'alert-success' })
       );
     }
   }
