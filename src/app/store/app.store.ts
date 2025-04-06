@@ -3,6 +3,7 @@ import { contactReducer } from './contact/contact.reducer';
 import { counterReducer } from './counter/counter.reducer';
 import { CounterModel } from './counter/counter.model';
 import { toastReducer } from './toast/toast.reducer';
+import { ToastState } from './toast/toast.model';
 
 export const appStore = {
   counter: { name: 'counter', reducer: counterReducer },
@@ -13,4 +14,5 @@ export const appStore = {
 export interface AppState {
   counter: CounterModel;
   contacts: ContactState;
+  toast: ToastState;
 }
