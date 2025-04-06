@@ -1,5 +1,6 @@
 <div class="flex flex-row items-center ms-5 mx-2 gap-5">
   <input
+    (change)="toggle()"
     type="checkbox"
     class="toggle toggle-success"
     [checked]="contact.active"
