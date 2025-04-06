@@ -9,7 +9,7 @@
       </tr>
     </thead>
     <tbody>
-      @for(contact of contacts | async; track $index){
+      @for(contact of contacts ; track $index){
       <tr>
         <th>{{ contact.id }}</th>
         <td>{{ contact.name }}</td>

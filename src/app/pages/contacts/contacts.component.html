@@ -3,16 +3,28 @@
   <button (click)="show()" class="btn btn-primary">Add</button>
 </div>
 
+<div class="flex mt-5">
+  <button (click)="displayAsList(true)" class="btn btn-sm btn-neutral">
+    List</button
+  ><button (click)="displayAsList(false)" class="btn btn-sm btn-neutral ms-2">
+    Grid
+  </button>
+</div>
+
 @if((options |async)?.showForm){
 <div class="flex my-10 justify-center">
   <app-contact-form
     [edit]="(options | async)?.edit || false"
   ></app-contact-form>
 </div>
+
 }
 
+<!-- displays -->
+@if(isListDisplay) {
 <div class="flex my-10 justify-center">
-  <app-contact-list></app-contact-list>
+  <app-contact-list [contacts]="contacts | async"></app-contact-list>
 </div>
-
-<app-contact-grid></app-contact-grid>
+} @else {
+<app-contact-grid [contacts]="contacts | async"></app-contact-grid>
+}
