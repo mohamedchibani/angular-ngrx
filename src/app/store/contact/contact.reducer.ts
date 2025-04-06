@@ -20,12 +20,18 @@ export const contactReducer = createReducer(
     showForm: false,
     contacts: [action.contact, ...state.contacts],
   })),
-  on(updateContact, (state, action) => ({
-    ...state,
-    contacts: state.contacts.map((contact) =>
-      contact.id === action.contact.id ? action.contact : contact
-    ),
-  })),
+  on(updateContact, (state, action) => {
+    console.log('update', action);
+    return {
+      ...state,
+      contacts: state.contacts.map((contact) =>
+        contact.id === action.contact.id ? action.contact : contact
+      ),
+      showForm: false,
+      edit: false,
+      contact: undefined,
+    };
+  }),
   on(deleteContact, (state, action) => ({
     ...state,
     contacts: state.contacts.filter((contact) => contact.id !== action.id),

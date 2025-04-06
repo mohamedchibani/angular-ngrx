@@ -5,7 +5,9 @@
 
 @if((options |async)?.showForm){
 <div class="flex my-10 justify-center">
-  <app-contact-form></app-contact-form>
+  <app-contact-form
+    [edit]="(options | async)?.edit || false"
+  ></app-contact-form>
 </div>
 }
 
