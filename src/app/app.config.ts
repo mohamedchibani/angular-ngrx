@@ -12,6 +12,8 @@ import { provideState, provideStore } from '@ngrx/store';
 import { counterReducer } from './store/counter/counter.reducer';
 import { appStore } from './store/app.store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { provideEffects } from '@ngrx/effects';
+import { ContactEffect } from './store/contact/contact.effect';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -23,5 +25,6 @@ export const appConfig: ApplicationConfig = {
     provideState(appStore.contacts),
     provideState(appStore.toast),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
+    provideEffects([ContactEffect]),
   ],
 };
