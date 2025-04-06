@@ -1,4 +1,8 @@
-import { ApplicationConfig, provideZoneChangeDetection, isDevMode } from '@angular/core';
+import {
+  ApplicationConfig,
+  provideZoneChangeDetection,
+  isDevMode,
+} from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -17,6 +21,7 @@ export const appConfig: ApplicationConfig = {
     provideStore(),
     provideState(appStore.counter),
     provideState(appStore.contacts),
-    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() })
-],
+    provideState(appStore.toast),
+    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
+  ],
 };
