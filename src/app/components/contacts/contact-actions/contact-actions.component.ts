@@ -25,18 +25,12 @@ export class ContactActionsComponent {
 
     if (this.contact.id) {
       this.store.dispatch(deleteContact({ id: this.contact.id }));
-      this.store.dispatch(
-        notify({ message: 'Contact deleted', color: 'alert-success' })
-      );
     }
   }
 
   toggle() {
     if (this.contact.id) {
       this.store.dispatch(toggleActiveContact({ id: this.contact.id }));
-      this.store.dispatch(
-        notify({ message: 'Contact changed', color: 'alert-info' })
-      );
     }
   }
 
