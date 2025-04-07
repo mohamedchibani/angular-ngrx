@@ -7,7 +7,7 @@ import {
   toggleActiveContact,
   updateContact,
 } from './contact.actions';
-import { exhaustMap, map, switchMap } from 'rxjs';
+import { catchError, exhaustMap, map, of, switchMap } from 'rxjs';
 import { notify } from '../toast/toast.actions';
 import { ContactsService } from '../../services/contacts.service';
 
@@ -27,7 +27,15 @@ export class ContactEffect {
               message: 'Contact created',
               color: 'alert-success',
             }),
-          ])
+          ]),
+          catchError((error) =>
+            of(
+              notify({
+                message: 'Error ' + error,
+                color: 'alert-error',
+              })
+            )
+          )
         )
       )
     )

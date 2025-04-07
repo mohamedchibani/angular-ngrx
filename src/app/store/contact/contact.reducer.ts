@@ -10,13 +10,15 @@ import {
   cancel,
   editContact,
   addContactSuccess,
+  addContactFailure,
 } from './contact.actions';
 import { contacts } from '../../data';
 
 export const contactReducer = createReducer(
   contactState,
   on(loadContacts, (state) => ({ ...state, contacts: contacts })),
-  on(addContact, (state, action) => ({
+  // add contact
+  on(addContact, (state) => ({
     ...state,
   })),
   on(addContactSuccess, (state, action) => ({
@@ -24,8 +26,11 @@ export const contactReducer = createReducer(
     showForm: false,
     contacts: [action.contact, ...state.contacts],
   })),
+  on(addContactFailure, (state, action) => ({
+    ...state,
+    message: action.message,
+  })),
   on(updateContact, (state, action) => {
-    console.log('update', action);
     return {
       ...state,
       contacts: state.contacts.map((contact) =>
