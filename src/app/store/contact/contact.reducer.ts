@@ -9,6 +9,7 @@ import {
   show,
   cancel,
   editContact,
+  addContactSuccess,
 } from './contact.actions';
 import { contacts } from '../../data';
 
@@ -16,6 +17,9 @@ export const contactReducer = createReducer(
   contactState,
   on(loadContacts, (state) => ({ ...state, contacts: contacts })),
   on(addContact, (state, action) => ({
+    ...state,
+  })),
+  on(addContactSuccess, (state, action) => ({
     ...state,
     showForm: false,
     contacts: [action.contact, ...state.contacts],

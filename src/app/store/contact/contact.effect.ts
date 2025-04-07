@@ -2,11 +2,12 @@ import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
   addContact,
+  addContactSuccess,
   deleteContact,
   toggleActiveContact,
   updateContact,
 } from './contact.actions';
-import { exhaustMap, map } from 'rxjs';
+import { exhaustMap, map, switchMap } from 'rxjs';
 import { notify } from '../toast/toast.actions';
 import { ContactsService } from '../../services/contacts.service';
 
@@ -19,13 +20,15 @@ export class ContactEffect {
     this.actions$.pipe(
       ofType(addContact),
       exhaustMap((data) =>
-        this.contactsService
-          .save(data.contact)
-          .pipe(
-            map((res) =>
-              notify({ message: 'Contact created', color: 'alert-success' })
-            )
-          )
+        this.contactsService.save(data.contact).pipe(
+          switchMap((res) => [
+            addContactSuccess({ contact: res }),
+            notify({
+              message: 'Contact created',
+              color: 'alert-success',
+            }),
+          ])
+        )
       )
     )
   );

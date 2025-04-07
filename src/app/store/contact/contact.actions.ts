@@ -6,6 +6,12 @@ export const addContact = createAction(
   '[Contacts] Create a contact',
   props<{ contact: ContactModel }>()
 );
+
+export const addContactSuccess = createAction(
+  '[Contacts] Create a contact successfully',
+  props<{ contact: ContactModel }>()
+);
+
 export const updateContact = createAction(
   '[Contacts] Update a contact',
   props<{ contact: ContactModel }>()
