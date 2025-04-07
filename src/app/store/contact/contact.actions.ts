@@ -1,9 +1,19 @@
 import { createAction, props } from '@ngrx/store';
 import { ContactModel } from './contact.model';
 
+// load contact
 export const loadContacts = createAction('[Contacts] Load list of contacts');
 
-// Add contact
+export const loadContactsSuccess = createAction(
+  '[Contacts] Load list of contacts successfully',
+  props<{ contacts: ContactModel[] }>()
+);
+export const loadContactsFailure = createAction(
+  '[Contacts] Load list of contacts with failure',
+  props<{ message: string }>()
+);
+
+// add contact
 export const addContact = createAction(
   '[Contacts] Create a contact',
   props<{ contact: ContactModel }>()

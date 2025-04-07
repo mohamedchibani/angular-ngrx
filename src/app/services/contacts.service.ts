@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ContactsService {
-  apiUrl = 'http://localhost:3001/contactsa';
+  apiUrl = 'http://localhost:3001/contacts';
 
   http = inject(HttpClient);
 

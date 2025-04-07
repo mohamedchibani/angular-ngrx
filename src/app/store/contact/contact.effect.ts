@@ -7,6 +7,9 @@ import {
   deleteContact,
   deleteContactFailure,
   deleteContactSuccess,
+  loadContacts,
+  loadContactsFailure,
+  loadContactsSuccess,
   toggleActiveContact,
   toggleActiveContactFailure,
   toggleActiveContactSuccess,
@@ -22,6 +25,32 @@ import { ContactsService } from '../../services/contacts.service';
 export class ContactEffect {
   actions$ = inject(Actions);
   contactsService = inject(ContactsService);
+
+  // load contacts
+  loadContactsEffect = createEffect(() =>
+    this.actions$.pipe(
+      ofType(loadContacts),
+      exhaustMap((data) =>
+        this.contactsService.loadAll().pipe(
+          map((res) => {
+            console.log('🚀 ~ ContactEffect ~ map ~ res:', res);
+            return loadContactsSuccess({ contacts: res });
+          }),
+          catchError((error) =>
+            of(
+              loadContactsFailure({ message: error.message }),
+              notify({
+                message: 'Error ' + error.message,
+                color: 'alert-error',
+                position: 'toast-top toast-center',
+                duration: 5000,
+              })
+            )
+          )
+        )
+      )
+    )
+  );
 
   // add contact
   addContactEffect = createEffect(() =>

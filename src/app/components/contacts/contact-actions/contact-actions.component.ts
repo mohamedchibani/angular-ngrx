@@ -1,4 +1,3 @@
-import { contacts } from './../../../data';
 import { Component, inject, Input } from '@angular/core';
 import { ContactModel } from '../../../store/contact/contact.model';
 import { Store } from '@ngrx/store';
@@ -7,7 +6,6 @@ import {
   editContact,
   toggleActiveContact,
 } from '../../../store/contact/contact.actions';
-import { notify } from '../../../store/toast/toast.actions';
 
 @Component({
   selector: 'app-contact-actions',

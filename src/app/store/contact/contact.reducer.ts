@@ -17,12 +17,24 @@ import {
   deleteContactFailure,
   toggleActiveContactSuccess,
   toggleActiveContactFailure,
+  loadContactsSuccess,
+  loadContactsFailure,
 } from './contact.actions';
-import { contacts } from '../../data';
 
 export const contactReducer = createReducer(
   contactState,
-  on(loadContacts, (state) => ({ ...state, contacts: contacts })),
+
+  // load contact
+  on(loadContacts, (state) => ({ ...state })),
+  on(loadContactsSuccess, (state, action) => ({
+    ...state,
+    contacts: action.contacts,
+  })),
+  on(loadContactsFailure, (state, action) => ({
+    ...state,
+    message: action.message,
+  })),
+
   // add contact
   on(addContact, (state) => ({
     ...state,
@@ -39,7 +51,7 @@ export const contactReducer = createReducer(
   })),
 
   // update contact
-  on(updateContact, (state, action) => {
+  on(updateContact, (state) => {
     return {
       ...state,
     };
@@ -63,7 +75,7 @@ export const contactReducer = createReducer(
   }),
 
   // delete contact
-  on(deleteContact, (state, action) => ({
+  on(deleteContact, (state) => ({
     ...state,
   })),
   on(deleteContactSuccess, (state, action) => ({

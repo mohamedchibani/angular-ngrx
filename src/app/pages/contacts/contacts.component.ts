@@ -10,7 +10,7 @@ import {
   selectContacts,
   selectMessage,
 } from '../../store/contact/contact.selectors';
-import { show } from '../../store/contact/contact.actions';
+import { loadContacts, show } from '../../store/contact/contact.actions';
 import { ContactModel } from '../../store/contact/contact.model';
 
 @Component({
@@ -35,6 +35,8 @@ export class ContactsComponent {
   errorMessage!: Observable<string>;
 
   ngOnInit() {
+    this.store.dispatch(loadContacts());
+
     this.options = this.store.select(selectContactOptions);
     this.contacts = this.store.select(selectContacts);
     this.errorMessage = this.store.select(selectMessage);
