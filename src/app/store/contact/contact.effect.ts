@@ -2,6 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
   addContact,
+  addContactFailure,
   addContactSuccess,
   deleteContact,
   toggleActiveContact,
@@ -30,9 +31,12 @@ export class ContactEffect {
           ]),
           catchError((error) =>
             of(
+              addContactFailure({ message: error.message }),
               notify({
-                message: 'Error ' + error,
+                message: 'Error ' + error.message,
                 color: 'alert-error',
+                position: 'toast-top toast-center',
+                duration: 5000,
               })
             )
           )

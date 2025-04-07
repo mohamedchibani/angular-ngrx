@@ -6,4 +6,5 @@ export const contactState: ContactState = {
   edit: false,
   showForm: false,
   contact: undefined,
+  message: '',
 };

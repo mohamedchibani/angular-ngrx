@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import {
   selectContactOptions,
   selectContacts,
+  selectMessage,
 } from '../../store/contact/contact.selectors';
 import { show } from '../../store/contact/contact.actions';
 import { ContactModel } from '../../store/contact/contact.model';
@@ -31,9 +32,12 @@ export class ContactsComponent {
 
   isListDisplay = true;
 
+  errorMessage!: Observable<string>;
+
   ngOnInit() {
     this.options = this.store.select(selectContactOptions);
     this.contacts = this.store.select(selectContacts);
+    this.errorMessage = this.store.select(selectMessage);
   }
 
   show() {

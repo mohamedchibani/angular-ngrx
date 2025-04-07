@@ -25,6 +25,7 @@ export const contactReducer = createReducer(
     ...state,
     showForm: false,
     contacts: [action.contact, ...state.contacts],
+    message: '',
   })),
   on(addContactFailure, (state, action) => ({
     ...state,

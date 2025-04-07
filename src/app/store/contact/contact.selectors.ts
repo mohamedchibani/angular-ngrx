@@ -17,3 +17,8 @@ export const selectContact = createSelector(
   trackContacts,
   (state) => state.contact
 );
+
+export const selectMessage = createSelector(
+  trackContacts,
+  (state) => state.message
+);

@@ -10,4 +10,5 @@ export interface ContactState {
   edit: boolean;
   showForm: boolean;
   contact: ContactModel | undefined;
+  message: string;
 }
