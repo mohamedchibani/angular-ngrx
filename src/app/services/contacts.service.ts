@@ -19,8 +19,8 @@ export class ContactsService {
     return this.http.post<ContactModel>(this.apiUrl, contact);
   }
 
-  updateContact(contact: ContactModel, id: number): Observable<ContactModel> {
-    return this.http.put<ContactModel>(`${this.apiUrl}/${id}`, contact);
+  update(contact: ContactModel): Observable<ContactModel> {
+    return this.http.put<ContactModel>(`${this.apiUrl}/${contact.id}`, contact);
   }
 
   toggleStatus(active: boolean, id: number): Observable<ContactModel> {

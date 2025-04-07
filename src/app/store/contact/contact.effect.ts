@@ -33,24 +33,47 @@ export class ContactEffect {
   updateContactEffect = createEffect(() =>
     this.actions$.pipe(
       ofType(updateContact),
-      map(() => notify({ message: 'Contact updated', color: 'alert-warning' }))
+      exhaustMap((data) =>
+        this.contactsService
+          .update(data.contact)
+          .pipe(
+            map((res) =>
+              notify({ message: 'Contact updated', color: 'alert-success' })
+            )
+          )
+      )
     )
   );
 
   deleteContactEffect = createEffect(() =>
     this.actions$.pipe(
       ofType(deleteContact),
-      map(() => notify({ message: 'Contact deleted', color: 'alert-error' }))
+      exhaustMap((data) =>
+        this.contactsService
+          .destroy(data.id)
+          .pipe(
+            map((res) =>
+              notify({ message: 'Contact deleted', color: 'alert-success' })
+            )
+          )
+      )
     )
   );
 
   toggleContactEffect = createEffect(() =>
     this.actions$.pipe(
       ofType(toggleActiveContact),
-      map((data) => {
-        const status = data.active ? 'desactivated' : 'activated';
-        return notify({ message: `Contact ${status}`, color: 'alert-info' });
-      })
+      exhaustMap((data) =>
+        this.contactsService.toggleStatus(!data.active, data.id).pipe(
+          map((data) => {
+            const status = data.active ? 'desactivated' : 'activated';
+            return notify({
+              message: `Contact ${status}`,
+              color: 'alert-info',
+            });
+          })
+        )
+      )
     )
   );
 }
