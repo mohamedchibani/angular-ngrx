@@ -19,18 +19,51 @@ export const addContactFailure = createAction(
   props<{ message: string }>()
 );
 
+// update contact
 export const updateContact = createAction(
   '[Contacts] Update a contact',
   props<{ contact: ContactModel }>()
 );
+
+export const updateContactSuccess = createAction(
+  '[Contacts] Update a contact successfully',
+  props<{ contact: ContactModel }>()
+);
+
+export const updateContactFailure = createAction(
+  '[Contacts] Update a contact with failure',
+  props<{ message: string }>()
+);
+
+// delete contact
 export const deleteContact = createAction(
   '[Contacts] Delete a contact',
   props<{ id: number }>()
 );
 
+export const deleteContactSuccess = createAction(
+  '[Contacts] Delete a contact successfully',
+  props<{ id: number }>()
+);
+
+export const deleteContactFailure = createAction(
+  '[Contacts] Delete a contact with failure',
+  props<{ message: string }>()
+);
+
 export const toggleActiveContact = createAction(
   '[Contacts] Toggle active a contact',
   props<{ id: number; active: boolean }>()
+);
+
+export const toggleActiveContactSuccess = createAction(
+  '[Contacts] Toggle active a contact successfully',
+  props<{ id: number }>()
+);
+
+export const toggleActiveContactFailure = createAction(
+  '[Contacts] Toggle active a contact with failure',
+  props<{ message: string }>()
 );
 
 export const editContact = createAction(

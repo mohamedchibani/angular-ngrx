@@ -11,6 +11,12 @@ import {
   editContact,
   addContactSuccess,
   addContactFailure,
+  updateContactSuccess,
+  updateContactFailure,
+  deleteContactSuccess,
+  deleteContactFailure,
+  toggleActiveContactSuccess,
+  toggleActiveContactFailure,
 } from './contact.actions';
 import { contacts } from '../../data';
 
@@ -31,7 +37,14 @@ export const contactReducer = createReducer(
     ...state,
     message: action.message,
   })),
+
+  // update contact
   on(updateContact, (state, action) => {
+    return {
+      ...state,
+    };
+  }),
+  on(updateContactSuccess, (state, action) => {
     return {
       ...state,
       contacts: state.contacts.map((contact) =>
@@ -42,17 +55,41 @@ export const contactReducer = createReducer(
       contact: undefined,
     };
   }),
+  on(updateContactFailure, (state, action) => {
+    return {
+      ...state,
+      message: action.message,
+    };
+  }),
+
+  // delete contact
   on(deleteContact, (state, action) => ({
+    ...state,
+  })),
+  on(deleteContactSuccess, (state, action) => ({
     ...state,
     contacts: state.contacts.filter((contact) => contact.id !== action.id),
   })),
+  on(deleteContactFailure, (state, action) => ({
+    ...state,
+    message: action.message,
+  })),
+
+  // toggle active
   on(toggleActiveContact, (state, action) => ({
+    ...state,
+  })),
+  on(toggleActiveContactSuccess, (state, action) => ({
     ...state,
     contacts: state.contacts.map((contact) =>
       contact.id === action.id
         ? { ...contact, active: !contact.active }
         : contact
     ),
+  })),
+  on(toggleActiveContactFailure, (state, action) => ({
+    ...state,
+    message: action.message,
   })),
   on(show, (state) => ({
     ...state,
