@@ -5,8 +5,14 @@ import {
   addContactFailure,
   addContactSuccess,
   deleteContact,
+  deleteContactFailure,
+  deleteContactSuccess,
   toggleActiveContact,
+  toggleActiveContactFailure,
+  toggleActiveContactSuccess,
   updateContact,
+  updateContactFailure,
+  updateContactSuccess,
 } from './contact.actions';
 import { catchError, exhaustMap, map, of, switchMap } from 'rxjs';
 import { notify } from '../toast/toast.actions';
@@ -17,6 +23,7 @@ export class ContactEffect {
   actions$ = inject(Actions);
   contactsService = inject(ContactsService);
 
+  // add contact
   addContactEffect = createEffect(() =>
     this.actions$.pipe(
       ofType(addContact),
@@ -45,48 +52,88 @@ export class ContactEffect {
     )
   );
 
+  // update contact
   updateContactEffect = createEffect(() =>
     this.actions$.pipe(
       ofType(updateContact),
       exhaustMap((data) =>
-        this.contactsService
-          .update(data.contact)
-          .pipe(
-            map((res) =>
-              notify({ message: 'Contact updated', color: 'alert-success' })
+        this.contactsService.update(data.contact).pipe(
+          switchMap((res) => [
+            updateContactSuccess({ contact: res }),
+            notify({
+              message: 'Contact updated',
+              color: 'alert-success',
+            }),
+          ]),
+          catchError((error) =>
+            of(
+              updateContactFailure({ message: error.message }),
+              notify({
+                message: 'Error ' + error.message,
+                color: 'alert-error',
+                position: 'toast-top toast-center',
+                duration: 5000,
+              })
             )
           )
+        )
       )
     )
   );
 
+  // delete contact
   deleteContactEffect = createEffect(() =>
     this.actions$.pipe(
       ofType(deleteContact),
       exhaustMap((data) =>
-        this.contactsService
-          .destroy(data.id)
-          .pipe(
-            map((res) =>
-              notify({ message: 'Contact deleted', color: 'alert-success' })
+        this.contactsService.destroy(data.id).pipe(
+          switchMap((res) => [
+            deleteContactSuccess({ id: data.id }),
+            notify({
+              message: 'Contact deleted',
+              color: 'alert-success',
+            }),
+          ]),
+          catchError((error) =>
+            of(
+              deleteContactFailure({ message: error.message }),
+              notify({
+                message: 'Error ' + error.message,
+                color: 'alert-error',
+                position: 'toast-top toast-center',
+                duration: 5000,
+              })
             )
           )
+        )
       )
     )
   );
 
+  // toggle contact
   toggleContactEffect = createEffect(() =>
     this.actions$.pipe(
       ofType(toggleActiveContact),
       exhaustMap((data) =>
         this.contactsService.toggleStatus(!data.active, data.id).pipe(
-          map((data) => {
-            const status = data.active ? 'desactivated' : 'activated';
-            return notify({
-              message: `Contact ${status}`,
-              color: 'alert-info',
-            });
-          })
+          switchMap((res) => [
+            toggleActiveContactSuccess({ id: data.id }),
+            notify({
+              message: 'Contact changed',
+              color: 'alert-success',
+            }),
+          ]),
+          catchError((error) =>
+            of(
+              toggleActiveContactFailure({ message: error.message }),
+              notify({
+                message: 'Error ' + error.message,
+                color: 'alert-error',
+                position: 'toast-top toast-center',
+                duration: 5000,
+              })
+            )
+          )
         )
       )
     )
