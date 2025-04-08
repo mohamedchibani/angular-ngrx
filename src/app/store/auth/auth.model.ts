@@ -6,6 +6,8 @@ export interface UserModel {
   lastName: string;
   gender: string;
   image: string;
+  accessToken: string;
+  refreshToken: string;
 }
 
 export interface AuthState {
@@ -13,4 +15,5 @@ export interface AuthState {
   token: string;
   refreshToken: string;
   isAuthenticated: boolean;
+  errorMessage: string;
 }

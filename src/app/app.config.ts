@@ -9,7 +9,6 @@ import { routes } from './app.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { authInterceptor } from './interceptors/auth.interceptor';
 import { provideState, provideStore } from '@ngrx/store';
-import { counterReducer } from './store/counter/counter.reducer';
 import { appStore } from './store/app.store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideEffects } from '@ngrx/effects';
@@ -24,6 +23,7 @@ export const appConfig: ApplicationConfig = {
     provideState(appStore.counter),
     provideState(appStore.contacts),
     provideState(appStore.toast),
+    provideState(appStore.auth),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     provideEffects([ContactEffect]),
   ],
