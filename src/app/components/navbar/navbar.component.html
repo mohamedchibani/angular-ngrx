@@ -4,7 +4,7 @@
   </div>
   <div class="flex-none">
     <ul class="menu menu-horizontal px-1">
-      @if(authService.isAthenticated()){
+      @if(isAuth |async){
 
       <li>
         <a
@@ -43,8 +43,8 @@
           [routerLinkActiveOptions]="{ exact: true }"
           routerLinkActive="nav-active"
           routerLink="/counter"
-          >Counter ({{ counterService.count | async }})</a
-        >
+          >Counter
+        </a>
       </li>
       <li>
         <a
@@ -54,14 +54,14 @@
           >Users</a
         >
       </li>
-      } @if(authService.isAthenticated()){
+      } @if(isAuth |async){
 
       <div class="dropdown dropdown-end">
         <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
           <div class="w-10 rounded-full">
             <img
               alt="Tailwind CSS Navbar component"
-              [src]="authService.getUser()?.image"
+              [src]="(user | async)?.image"
             />
           </div>
         </div>
@@ -71,13 +71,13 @@
         >
           <li>
             <a class="justify-between">
-              {{ authService.getUser()?.firstName }}
-              {{ authService.getUser()?.lastName }}
+              {{ (user | async)?.firstName }}
+              {{ (user | async)?.lastName }}
               <span class="badge">User</span>
             </a>
           </li>
           <li><a>Settings</a></li>
-          <li><button (click)="authService.logout()">Logout</button></li>
+          <li><button>Logout</button></li>
         </ul>
       </div>
       } @else {

@@ -7,6 +7,8 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { login } from '../../../store/auth/auth.actions';
 
 @Component({
   selector: 'app-login',
@@ -21,6 +23,8 @@ export class LoginComponent {
 
   loginForm!: FormGroup;
 
+  store = inject(Store);
+
   constructor() {
     this.loginForm = new FormGroup({
       username: new FormControl('', [Validators.required]),
@@ -32,14 +36,16 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    this.errorMessage = '';
     const { username, password } = this.loginForm.value;
-    this.authService.login(username, password).subscribe({
-      next: (res) => this.router.navigate(['/blog']),
-      error: (_) => {
-        this.errorMessage = 'Username or password is wrong';
-        this.loginForm.reset();
-      },
-    });
+    this.store.dispatch(login({ username, password }));
+
+    // this.errorMessage = '';
+    // this.authService.login(username, password).subscribe({
+    //   next: (res) => this.router.navigate(['/blog']),
+    //   error: (_) => {
+    //     this.errorMessage = 'Username or password is wrong';
+    //     this.loginForm.reset();
+    //   },
+    // });
   }
 }

@@ -1,8 +1,13 @@
-import { AuthService } from './../../services/auth.service';
 import { Component, inject } from '@angular/core';
-import { CounterService } from '../../services/counter.service';
 import { AsyncPipe } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { UserModel } from '../../store/auth/auth.model';
+import { Observable } from 'rxjs';
+import {
+  selectIsAuthenticated,
+  selectUser,
+} from '../../store/auth/auth.selectors';
 
 @Component({
   selector: 'app-navbar',
@@ -11,6 +16,12 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './navbar.component.css',
 })
 export class NavbarComponent {
-  counterService = inject(CounterService);
-  authService = inject(AuthService);
+  store = inject(Store);
+  user!: Observable<UserModel | null>;
+  isAuth!: Observable<boolean>;
+
+  ngOnInit() {
+    this.user = this.store.select(selectUser);
+    this.isAuth = this.store.select(selectIsAuthenticated);
+  }
 }
