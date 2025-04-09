@@ -48,7 +48,6 @@ export const routes: Routes = [
       import('../app/pages/counter-page/counter-page.component').then(
         (c) => c.CounterPageComponent
       ),
-    canActivate: [authGuard],
   },
   {
     path: 'blog',

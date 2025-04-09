@@ -14,18 +14,22 @@ import { appStore } from './store/app.store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideEffects } from '@ngrx/effects';
 import { ContactEffect } from './store/contact/contact.effect';
+import { provideRouterStore, routerReducer } from '@ngrx/router-store';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideHttpClient(withInterceptors([authInterceptor])),
-    provideStore(),
+    provideStore({
+      router: routerReducer,
+    }),
     provideState(appStore.counter),
     provideState(appStore.contacts),
     provideState(appStore.toast),
     provideState(appStore.auth),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     provideEffects([ContactEffect, AuthEffect]),
+    provideRouterStore(),
   ],
 };
