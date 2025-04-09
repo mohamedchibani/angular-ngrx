@@ -10,6 +10,8 @@ export const authReducer = createReducer(
     token: action.user.accessToken,
     user: action.user,
     refreshToken: action.user.refreshToken,
+    isAuthenticated: !!action.user.accessToken,
+    errorMessage: '',
   })),
   on(loginFailure, (state, action) => ({
     ...state,

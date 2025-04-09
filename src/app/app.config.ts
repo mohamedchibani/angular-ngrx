@@ -1,3 +1,4 @@
+import { AuthEffect } from './store/auth/auth.effects';
 import {
   ApplicationConfig,
   provideZoneChangeDetection,
@@ -25,6 +26,6 @@ export const appConfig: ApplicationConfig = {
     provideState(appStore.toast),
     provideState(appStore.auth),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
-    provideEffects([ContactEffect]),
+    provideEffects([ContactEffect, AuthEffect]),
   ],
 };

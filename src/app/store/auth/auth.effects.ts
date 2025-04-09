@@ -5,7 +5,7 @@ import { login, loginFailure, loginSuccess } from './auth.actions';
 import { catchError, exhaustMap, map, of } from 'rxjs';
 
 @Injectable()
-export class AuthEffect {
+export class {
   authService = inject(AuthService);
   actions$ = inject(Actions);
 
