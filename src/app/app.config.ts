@@ -15,6 +15,7 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideEffects } from '@ngrx/effects';
 import { ContactEffect } from './store/contact/contact.effect';
 import { provideRouterStore, routerReducer } from '@ngrx/router-store';
+import { RouterEffect } from './store/router/router.effect';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -23,7 +24,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptors([authInterceptor])),
     provideStore(appStore),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
-    provideEffects([ContactEffect, AuthEffect]),
+    provideEffects([ContactEffect, AuthEffect, RouterEffect]),
     provideRouterStore(),
   ],
 };
