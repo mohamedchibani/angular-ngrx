@@ -30,7 +30,5 @@ export class LayoutBlogComponent {
     this.router.events.subscribe((res) => {
       this.title$ = this.route.firstChild?.title as Observable<string>;
     });
-
-    this.categoryStore.loadCategories().subscribe();
   }
 }

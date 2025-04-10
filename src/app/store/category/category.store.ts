@@ -1,5 +1,11 @@
 import { inject } from '@angular/core';
-import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
+import {
+  patchState,
+  signalStore,
+  withHooks,
+  withMethods,
+  withState,
+} from '@ngrx/signals';
 import { categoryState } from './category.state';
 import { CategoryService } from '../../services/category.service';
 import { catchError, tap, throwError } from 'rxjs';
@@ -123,5 +129,13 @@ export const CategoryStore = signalStore(
           return `Backend error ${error.status}: ${error.message}`;
       }
     },
-  }))
+  })),
+  withHooks({
+    onInit({ loadCategories }) {
+      loadCategories().subscribe();
+    },
+    onDestroy(store) {
+      patchState(store, { isLoading: false, isOpen: false, category: null });
+    },
+  })
 );
