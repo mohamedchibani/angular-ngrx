@@ -48,6 +48,7 @@
         <div>
           Title should be greather than
           {{ title.errors?.['minlength']?.['actualLength']
+
           }}/{{ title.errors?.['minlength']?.['requiredLength'] }}
           caracters
         </div>
@@ -57,7 +58,9 @@
     </label>
     <label class="form-control w-full max-w-xs">
       <div class="label">
-        <span class="label-text">Category</span>
+        <span class="label-text">
+          <button class="btn btn-sm btn-neutral">+</button> Category</span
+        >
       </div>
       <select
         #category="ngModel"
@@ -102,6 +105,7 @@
         <div>
           body should be greather than
           {{ body.errors?.['minlength']?.['actualLength']
+
 
 
 

@@ -1,12 +1,18 @@
-<div tabindex="0" role="button" class="btn m-1">Categories</div>
+<ul class="flex menu bg-base-200 rounded-box">
+  <li class="menu-title">
+    <div class="flex items-center justify-between">
+      <span>Categories</span>
+      <button class="btn btn-sm btn-neutral">+</button>
+    </div>
+  </li>
 
-<ul
-  tabindex="0"
-  class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
->
-  @for (category of []; track $index) {
+  @for (category of [1]; track $index) {
   <li>
-    <a></a>
+    <div class="flex items-center justify-between">
+      <a href="">Coding</a>
+      <button class="btn btn-xs btn-warning">!</button>
+      <button class="btn btn-xs btn-error ms-1">-</button>
+    </div>
   </li>
   }
 </ul>

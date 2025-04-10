@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './category-form.component.css',
 })
 export class CategoryFormComponent {
-  isOpen = true;
+  isOpen = false;
 }
