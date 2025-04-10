@@ -13,7 +13,11 @@ export const CategoryStore = signalStore(
       });
       return categoryService
         .all()
-        .pipe(tap((categories) => patchState(store, { categories })));
+        .pipe(
+          tap((categories) =>
+            patchState(store, { categories, isLoading: false })
+          )
+        );
     },
     add() {
       patchState(store, { isOpen: true });

@@ -1,3 +1,4 @@
+import { CategoryStore } from './../../../store/category/category.store';
 import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import {
@@ -23,14 +24,13 @@ export class LayoutBlogComponent {
   route = inject(ActivatedRoute);
 
   categoryService = inject(CategoryService);
+  categoryStore = inject(CategoryStore);
 
   ngOnInit() {
     this.router.events.subscribe((res) => {
       this.title$ = this.route.firstChild?.title as Observable<string>;
     });
 
-    this.categoryService.all().subscribe((res) => {
-      this.categoryService.categories.set(res);
-    });
+    this.categoryStore.loadCategories().subscribe();
   }
 }

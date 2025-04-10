@@ -13,8 +13,4 @@ import { AsyncPipe } from '@angular/common';
 })
 export class CategoryListComponent {
   categoryStore = inject(CategoryStore);
-
-  ngOnInit() {
-    this.categoryStore.loadCategories().subscribe();
-  }
 }

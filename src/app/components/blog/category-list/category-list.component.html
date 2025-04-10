@@ -21,6 +21,8 @@
   }
 </ul>
 
-@if(categoryStore.isOpen()){
+@if(categoryStore.isLoading()){
+<li>Loading...</li>
+} @if(categoryStore.isOpen()){
 <app-category-form></app-category-form>
 }
