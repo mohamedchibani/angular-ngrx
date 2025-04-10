@@ -1,4 +1,4 @@
-<ul class="flex menu bg-base-200 rounded-box">
+<ul class="flex menu bg-base-200 rounded-box w-auto">
   <li class="menu-title">
     <div class="flex items-center justify-between">
       <span>Categories</span>
@@ -8,12 +8,14 @@
     </div>
   </li>
 
-  @for (category of [1]; track $index) {
+  @for (category of categoryStore.categories(); track $index) {
   <li>
     <div class="flex items-center justify-between">
-      <a href="">Coding</a>
-      <button class="btn btn-xs btn-warning">!</button>
-      <button class="btn btn-xs btn-error ms-1">-</button>
+      <a href="">{{ category.name }}</a>
+      <div>
+        <button class="btn btn-xs btn-warning">!</button>
+        <button class="btn btn-xs btn-error ms-1">-</button>
+      </div>
     </div>
   </li>
   }

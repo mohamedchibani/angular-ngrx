@@ -1,17 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Category } from '../models/article';
+import { CategoryModel } from '../store/category/category.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CategoryService {
-  categories = signal<Category[]>([]);
+  categories = signal<CategoryModel[]>([]);
   apiUrl = 'http://localhost:3001/categories';
   http = inject(HttpClient);
 
-  all(): Observable<Category[]> {
-    return this.http.get<Category[]>(this.apiUrl);
+  all(): Observable<CategoryModel[]> {
+    return this.http.get<CategoryModel[]>(this.apiUrl);
   }
 }
