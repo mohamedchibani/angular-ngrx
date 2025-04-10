@@ -8,6 +8,14 @@ import { CategoryModel } from './category.model';
 export const CategoryStore = signalStore(
   withState(categoryState),
   withMethods((store, categoryService = inject(CategoryService)) => ({
+    init() {
+      patchState(store, {
+        isOpen: false,
+        category: null,
+        isLoading: false,
+        errorMessage: '',
+      });
+    },
     loadCategories() {
       patchState(store, {
         isLoading: true,
@@ -54,13 +62,18 @@ export const CategoryStore = signalStore(
         )
       );
     },
-    init() {
-      patchState(store, {
-        isOpen: false,
-        category: null,
-        isLoading: false,
-        errorMessage: '',
-      });
+    delete(id: number) {
+      return categoryService
+        .destroy(id)
+        .pipe(
+          tap(() =>
+            patchState(store, {
+              categories: store
+                .categories()
+                .filter((currentCategory) => currentCategory.id !== id),
+            })
+          )
+        );
     },
   }))
 );

@@ -1,8 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CategoryFormComponent } from '../category-form/category-form.component';
 import { CategoryStore } from '../../../store/category/category.store';
-import { Observable } from 'rxjs';
-import { CategoryModel } from '../../../store/category/category.model';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
@@ -13,4 +11,11 @@ import { AsyncPipe } from '@angular/common';
 })
 export class CategoryListComponent {
   categoryStore = inject(CategoryStore);
+
+  deleteCategory(id: number) {
+    if (!confirm('are you sur to delete this category')) {
+      return;
+    }
+    this.categoryStore.delete(id).subscribe();
+  }
 }

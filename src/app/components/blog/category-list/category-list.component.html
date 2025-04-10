@@ -19,7 +19,14 @@
         >
           !
         </button>
-        <button class="btn btn-xs btn-error ms-1">-</button>
+        @if(category.id){
+        <button
+          class="btn btn-xs btn-error ms-1"
+          (click)="deleteCategory(category.id)"
+        >
+          -
+        </button>
+        }
       </div>
     </div>
   </li>
