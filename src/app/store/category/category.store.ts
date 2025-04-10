@@ -104,9 +104,24 @@ export const CategoryStore = signalStore(
       );
     },
     handleError(error: HttpErrorResponse): string {
-      return error.error instanceof ErrorEvent
-        ? error.error.message
-        : `Backend returned code ${error.status}, body error is: ${error.statusText}`;
+      if (error.error instanceof ErrorEvent) {
+        return 'Client-side error: ' + error.error.message;
+      }
+
+      switch (error.status) {
+        case 404:
+          return `Resource not found: ${error.message}`;
+        case 400:
+          return `Bad Request: Form not Valid !`;
+        case 401:
+          return `Unauthorized: Please log in`;
+        case 403:
+          return `Forbidden: You don't have permission to access this resource`;
+        case 500:
+          return `Server error: Please try again later`;
+        default:
+          return `Backend error ${error.status}: ${error.message}`;
+      }
     },
   }))
 );
