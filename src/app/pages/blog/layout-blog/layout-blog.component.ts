@@ -8,10 +8,11 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CategoryService } from '../../../services/category.service';
+import { CategoryListComponent } from '../../../components/blog/category-list/category-list.component';
 
 @Component({
   selector: 'app-layout-blog',
-  imports: [RouterOutlet, RouterLink, AsyncPipe],
+  imports: [RouterOutlet, RouterLink, AsyncPipe, CategoryListComponent],
   templateUrl: './layout-blog.component.html',
   styleUrl: './layout-blog.component.css',
 })

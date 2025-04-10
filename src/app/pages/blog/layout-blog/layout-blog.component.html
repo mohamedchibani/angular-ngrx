@@ -24,18 +24,6 @@
     <router-outlet></router-outlet>
   </div>
   <div class="basis-1/4">
-    <div class="dropdown dropdown-open">
-      <div tabindex="0" role="button" class="btn m-1">Categories</div>
-      <ul
-        tabindex="0"
-        class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
-      >
-        @for (category of categoryService.categories(); track $index) {
-        <li>
-          <a>{{ category.name }}</a>
-        </li>
-        }
-      </ul>
-    </div>
+    <app-category-list></app-category-list>
   </div>
 </div>

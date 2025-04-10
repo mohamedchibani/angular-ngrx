@@ -1,0 +1,14 @@
+<div tabindex="0" role="button" class="btn m-1">Categories</div>
+
+<ul
+  tabindex="0"
+  class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
+>
+  @for (category of []; track $index) {
+  <li>
+    <a></a>
+  </li>
+  }
+</ul>
+
+<app-category-form></app-category-form>
