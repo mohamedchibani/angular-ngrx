@@ -1,5 +1,6 @@
 import { NgClass } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { CategoryStore } from '../../../store/category/category.store';
 
 @Component({
   selector: 'app-category-form',
@@ -9,4 +10,9 @@ import { Component } from '@angular/core';
 })
 export class CategoryFormComponent {
   isOpen = false;
+  categoryStore = inject(CategoryStore);
+
+  ngOnInit() {
+    this.isOpen = this.categoryStore.isOpen();
+  }
 }

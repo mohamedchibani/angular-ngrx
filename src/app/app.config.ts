@@ -16,6 +16,7 @@ import { provideEffects } from '@ngrx/effects';
 import { ContactEffect } from './store/contact/contact.effect';
 import { provideRouterStore, routerReducer } from '@ngrx/router-store';
 import { RouterEffect } from './store/router/router.effect';
+import { CategoryStore } from './store/category/category.store';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -26,5 +27,6 @@ export const appConfig: ApplicationConfig = {
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     provideEffects([ContactEffect, AuthEffect, RouterEffect]),
     provideRouterStore(),
+    CategoryStore,
   ],
 };
