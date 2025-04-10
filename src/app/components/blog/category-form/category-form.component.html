@@ -1,24 +1,40 @@
-<!-- Open the modal using ID.showModal() method -->
 <dialog id="my_modal_1" class="modal" [ngClass]="{ 'modal-open': isOpen }">
   <div class="modal-box">
-    <h3 class="text-lg font-bold">Category</h3>
-    <form method="dialog">
-      <div class="form-control w-full max-w-xs my-5">
-        <label class="label">
-          <span class="label-text">Category name</span>
-        </label>
+    <h3 class="text-lg font-bold mb-2">Category</h3>
+
+    <form [formGroup]="categoryForm">
+      <label class="form-control w-full my-5">
+        <div class="label">
+          <span class="label-text">Name</span>
+        </div>
         <input
+          formControlName="name"
           type="text"
-          placeholder="Type here"
-          class="input input-bordered w-full max-w-xs my-2"
+          placeholder="Name"
+          class="input input-bordered w-full mt-2"
         />
+
+        @if(name?.invalid && (name?.dirty || name?.touched)) {
+        <div class="mx-3">
+          @if(name?.errors?.['required']) {
+          <span class="label label-text-alt text-red-500"
+            >Category Name is required !</span
+          >
+          } @if(name?.errors?.['minlength']) {
+          <span class="label label-text-alt text-red-500"
+            >Name should be more than 3 caracters !</span
+          >
+          }
+        </div>
+        }
+      </label>
+
+      <div class="modal-action">
+        <button type="submit" class="btn btn-neutral">Submit</button>
+        <button type="button" class="btn" (click)="categoryStore.init()">
+          Close
+        </button>
       </div>
-      <!-- if there is a button in form, it will close the modal -->
-      <button class="btn btn-primary me-2">Submit</button>
-      <button type="button" class="btn" (click)="categoryStore.init()">
-        Close
-      </button>
-      <div class="modal-action"></div>
     </form>
   </div>
 </dialog>
