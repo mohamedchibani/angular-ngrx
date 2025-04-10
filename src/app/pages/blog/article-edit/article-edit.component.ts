@@ -1,3 +1,4 @@
+import { CategoryStore } from './../../../store/category/category.store';
 import { BlogService } from './../../../services/blog.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CategoryService } from './../../../services/category.service';
@@ -23,6 +24,7 @@ export class ArticleEditComponent {
   route = inject(ActivatedRoute);
   router = inject(Router);
   location = inject(Location);
+  categoryStore = inject(CategoryStore);
 
   id!: number;
 

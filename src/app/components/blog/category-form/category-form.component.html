@@ -15,7 +15,9 @@
       </div>
       <!-- if there is a button in form, it will close the modal -->
       <button class="btn btn-primary me-2">Submit</button>
-      <button class="btn">Close</button>
+      <button type="button" class="btn" (click)="categoryStore.init()">
+        Close
+      </button>
       <div class="modal-action"></div>
     </form>
   </div>

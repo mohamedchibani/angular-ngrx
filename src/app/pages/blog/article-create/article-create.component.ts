@@ -1,3 +1,4 @@
+import { CategoryStore } from './../../../store/category/category.store';
 import { BlogService } from './../../../services/blog.service';
 import { Article } from '../../../models/article';
 import { CategoryService } from './../../../services/category.service';
@@ -15,6 +16,7 @@ export class ArticleCreateComponent {
   categoryService = inject(CategoryService);
   blogService = inject(BlogService);
   router = inject(Router);
+  categoryStore = inject(CategoryStore);
 
   submit(myForm: NgForm) {
     if (myForm.invalid) {

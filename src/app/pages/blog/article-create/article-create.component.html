@@ -49,6 +49,7 @@
           Title should be greather than
           {{ title.errors?.['minlength']?.['actualLength']
 
+
           }}/{{ title.errors?.['minlength']?.['requiredLength'] }}
           caracters
         </div>
@@ -59,7 +60,10 @@
     <label class="form-control w-full max-w-xs">
       <div class="label">
         <span class="label-text">
-          <button class="btn btn-sm btn-neutral">+</button> Category</span
+          <button class="btn btn-sm btn-neutral" (click)="categoryStore.add()">
+            +
+          </button>
+          Category</span
         >
       </div>
       <select
@@ -105,6 +109,7 @@
         <div>
           body should be greather than
           {{ body.errors?.['minlength']?.['actualLength']
+
 
 
 

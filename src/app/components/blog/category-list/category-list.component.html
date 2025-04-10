@@ -2,7 +2,9 @@
   <li class="menu-title">
     <div class="flex items-center justify-between">
       <span>Categories</span>
-      <button class="btn btn-sm btn-neutral">+</button>
+      <button (click)="categoryStore.add()" class="btn btn-sm btn-neutral">
+        +
+      </button>
     </div>
   </li>
 
@@ -17,4 +19,6 @@
   }
 </ul>
 
+@if(categoryStore.isOpen()){
 <app-category-form></app-category-form>
+}
