@@ -7,6 +7,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { CategoryModel } from '../../../store/category/category.model';
 
 @Component({
   selector: 'app-category-form',
@@ -32,5 +33,14 @@ export class CategoryFormComponent {
 
   get name() {
     return this.categoryForm.get('name');
+  }
+
+  submit() {
+    const category: CategoryModel = {
+      name: this.name?.value,
+      slug: this.name?.value.toLowerCase(),
+    };
+
+    this.categoryStore.create(category).subscribe();
   }
 }

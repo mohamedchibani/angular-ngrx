@@ -2,7 +2,7 @@
   <div class="modal-box">
     <h3 class="text-lg font-bold mb-2">Category</h3>
 
-    <form [formGroup]="categoryForm">
+    <form [formGroup]="categoryForm" (ngSubmit)="submit()">
       <label class="form-control w-full my-5">
         <div class="label">
           <span class="label-text">Name</span>

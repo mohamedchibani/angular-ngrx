@@ -14,4 +14,8 @@ export class CategoryService {
   all(): Observable<CategoryModel[]> {
     return this.http.get<CategoryModel[]>(this.apiUrl);
   }
+
+  persist(category: CategoryModel): Observable<CategoryModel> {
+    return this.http.post<CategoryModel>(this.apiUrl, category);
+  }
 }
