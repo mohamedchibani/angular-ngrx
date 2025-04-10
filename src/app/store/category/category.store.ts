@@ -4,8 +4,11 @@ import { categoryState } from './category.state';
 import { CategoryService } from '../../services/category.service';
 import { tap } from 'rxjs';
 import { CategoryModel } from './category.model';
+import { withDevtools } from '@angular-architects/ngrx-toolkit';
 
 export const CategoryStore = signalStore(
+  { providedIn: 'root' },
+  withDevtools('category'),
   withState(categoryState),
   withMethods((store, categoryService = inject(CategoryService)) => ({
     init() {
@@ -63,17 +66,15 @@ export const CategoryStore = signalStore(
       );
     },
     delete(id: number) {
-      return categoryService
-        .destroy(id)
-        .pipe(
-          tap(() =>
-            patchState(store, {
-              categories: store
-                .categories()
-                .filter((currentCategory) => currentCategory.id !== id),
-            })
-          )
-        );
+      return categoryService.destroy(id).pipe(
+        tap(() =>
+          patchState(store, {
+            categories: store
+              .categories()
+              .filter((currentCategory) => currentCategory.id !== id),
+          })
+        )
+      );
     },
   }))
 );
