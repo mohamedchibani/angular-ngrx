@@ -44,11 +44,16 @@ export class CategoryFormComponent {
   }
 
   submit() {
-    const category: CategoryModel = {
+    const myCategory: CategoryModel = {
       name: this.name?.value,
       slug: this.name?.value.toLowerCase(),
     };
 
-    this.categoryStore.create(category).subscribe();
+    const category = this.categoryStore.category();
+    const action = !category?.id
+      ? this.categoryStore.create(myCategory)
+      : this.categoryStore.modify(myCategory, category.id);
+
+    action.subscribe();
   }
 }

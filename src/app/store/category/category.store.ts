@@ -38,6 +38,22 @@ export const CategoryStore = signalStore(
     edit(category: CategoryModel) {
       patchState(store, { category, isOpen: true });
     },
+    modify(category: CategoryModel, id: number) {
+      return categoryService.update(category, id).pipe(
+        tap((category) =>
+          patchState(store, {
+            categories: store
+              .categories()
+              .map((currentCategory) =>
+                currentCategory.id === id ? category : currentCategory
+              ),
+            isOpen: false,
+            isLoading: false,
+            category: null,
+          })
+        )
+      );
+    },
     init() {
       patchState(store, {
         isOpen: false,

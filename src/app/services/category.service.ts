@@ -18,4 +18,8 @@ export class CategoryService {
   persist(category: CategoryModel): Observable<CategoryModel> {
     return this.http.post<CategoryModel>(this.apiUrl, category);
   }
+
+  update(category: CategoryModel, id: number): Observable<CategoryModel> {
+    return this.http.put<CategoryModel>(`${this.apiUrl}/${id}`, category);
+  }
 }
