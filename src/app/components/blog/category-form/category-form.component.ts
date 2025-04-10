@@ -29,6 +29,14 @@ export class CategoryFormComponent {
 
   ngOnInit() {
     this.isOpen = this.categoryStore.isOpen();
+
+    const category = this.categoryStore.category();
+
+    if (category) {
+      this.categoryForm.patchValue({
+        name: category.name,
+      });
+    }
   }
 
   get name() {

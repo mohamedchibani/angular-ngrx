@@ -30,8 +30,14 @@
       </label>
 
       <div class="modal-action">
-        <button type="submit" class="btn btn-neutral">Submit</button>
-        <button type="button" class="btn" (click)="categoryStore.init()">
+        <button
+          type="submit"
+          class="btn btn-neutral btn-sm"
+          [ngClass]="{ 'btn-warning': !!this.categoryStore.category() }"
+        >
+          Submit
+        </button>
+        <button type="button" class="btn btn-sm" (click)="categoryStore.init()">
           Close
         </button>
       </div>

@@ -22,20 +22,21 @@ export const CategoryStore = signalStore(
     },
     create(category: CategoryModel) {
       patchState(store, { isLoading: true, errorMessage: '', category: null });
-      return categoryService
-        .persist(category)
-        .pipe(
-          tap((category) =>
-            patchState(store, {
-              categories: [category, ...store.categories()],
-              isOpen: false,
-              isLoading: false,
-            })
-          )
-        );
+      return categoryService.persist(category).pipe(
+        tap((category) =>
+          patchState(store, {
+            categories: [category, ...store.categories()],
+            isOpen: false,
+            isLoading: false,
+          })
+        )
+      );
     },
     add() {
       patchState(store, { isOpen: true });
+    },
+    edit(category: CategoryModel) {
+      patchState(store, { category, isOpen: true });
     },
     init() {
       patchState(store, {
