@@ -2,9 +2,10 @@ import { inject } from '@angular/core';
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
 import { categoryState } from './category.state';
 import { CategoryService } from '../../services/category.service';
-import { tap } from 'rxjs';
+import { catchError, tap, throwError } from 'rxjs';
 import { CategoryModel } from './category.model';
 import { withDevtools } from '@angular-architects/ngrx-toolkit';
+import { HttpErrorResponse } from '@angular/common/http';
 
 export const CategoryStore = signalStore(
   { providedIn: 'root' },
@@ -23,13 +24,18 @@ export const CategoryStore = signalStore(
       patchState(store, {
         isLoading: true,
       });
-      return categoryService
-        .all()
-        .pipe(
-          tap((categories) =>
-            patchState(store, { categories, isLoading: false })
-          )
-        );
+      return categoryService.all().pipe(
+        tap((categories) =>
+          patchState(store, { categories, isLoading: false })
+        ),
+        catchError((error) => {
+          patchState(store, {
+            errorMessage: this.handleError(error),
+            isLoading: false,
+          });
+          return throwError(() => error);
+        })
+      );
     },
     create(category: CategoryModel) {
       patchState(store, { isLoading: true, errorMessage: '', category: null });
@@ -40,7 +46,14 @@ export const CategoryStore = signalStore(
             isOpen: false,
             isLoading: false,
           })
-        )
+        ),
+        catchError((error) => {
+          patchState(store, {
+            errorMessage: this.handleError(error),
+            isLoading: false,
+          });
+          return throwError(() => error);
+        })
       );
     },
     add() {
@@ -62,7 +75,14 @@ export const CategoryStore = signalStore(
             isLoading: false,
             category: null,
           })
-        )
+        ),
+        catchError((error) => {
+          patchState(store, {
+            errorMessage: this.handleError(error),
+            isLoading: false,
+          });
+          return throwError(() => error);
+        })
       );
     },
     delete(id: number) {
@@ -73,8 +93,20 @@ export const CategoryStore = signalStore(
               .categories()
               .filter((currentCategory) => currentCategory.id !== id),
           })
-        )
+        ),
+        catchError((error) => {
+          patchState(store, {
+            errorMessage: this.handleError(error),
+            isLoading: false,
+          });
+          return throwError(() => error);
+        })
       );
+    },
+    handleError(error: HttpErrorResponse): string {
+      return error.error instanceof ErrorEvent
+        ? error.error.message
+        : `Backend returned code ${error.status}, body error is: ${error.statusText}`;
     },
   }))
 );
